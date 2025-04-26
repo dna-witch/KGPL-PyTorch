@@ -1,9 +1,11 @@
 """
-The Aggregator of KGNN-LS.
+This module implements the aggregators used in of KGNN-LS.
 
 This module defines the base class for aggregators used in the KGNN-LS model.
 It includes methods for initializing the aggregator, calling it with input vectors and relations, and defining the forward pass.
 It also provides a method to get the layer ID for a given layer name.
+
+The Aggregator class is an abstract base class that should be subclassed by specific aggregator implementations.
 
 Need to rewrite the code to be more pythonic and to use PyTorch instead of TensorFlow.
 The code is based on the original implementation of KGNN-LS, which can be found at: 
