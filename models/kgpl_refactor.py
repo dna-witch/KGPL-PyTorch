@@ -132,7 +132,7 @@ class KGPLStudent(nn.Module):
             relations.append(neigh_r)
         return entities, relations
 
-# <--- KGPL Co-Training Model ---
+# <----- KGPL Co-Training Model ----->
 class KGPLCOT(nn.Module):
     def __init__(self, cfg, n_user, n_item, n_entity, n_relation, adj_entity, adj_relation, path_list_dict, train_data, eval_data, device):
         super().__init__()

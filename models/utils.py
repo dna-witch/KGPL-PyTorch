@@ -26,6 +26,14 @@ def compute_reachable_items(users, user_seed_dict, path_dict, item_freq, power):
     """
     For each user, find reachable items via KG paths and compute a pseudo-label distribution.
     This is adapted from compute_reachable_items_.
+
+    Args:
+        users: list of user IDs
+        user_seed_dict: dict mapping user to seed items
+        path_dict: dict mapping item to reachable items with their frequencies
+        item_freq: dict mapping item to its frequency in the dataset
+        power: exponent for frequency weighting
+
     Returns: dict of user -> (item_list, cumulative_probs)
     """
     reachable = {}
