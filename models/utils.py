@@ -22,29 +22,6 @@ def grouper(n, iterable, squash=None):
             chunk += [None] * (n - len(chunk))
         yield chunk
 
-def train_epoch(model, data_loader, optimizer):
-    model.train()
-    total_loss = 0.0
-    for batch in data_loader:
-        users, items, labels, neg_mask, plabel_mask = batch
-        users = users.to(device); items = items.to(device)
-        labels = labels.to(device); neg_mask = neg_mask.to(device); plabel_mask = plabel_mask.to(device)
-
-        optimizer.zero_grad()
-        scores = model(users, items)  # [batch]
-        # Compute losses as above
-        loss_fn = nn.BCEWithLogitsLoss(reduction='none')
-        loss_all = loss_fn(scores, labels)
-        loss_obs = (loss_all * (1 - neg_mask) * (1 - plabel_mask)).mean()
-        loss_neg = (loss_all * neg_mask).mean()
-        loss_pl  = (loss_all * plabel_mask).mean()
-        loss = loss_obs + loss_neg + loss_pl
-
-        loss.backward()
-        optimizer.step()
-        total_loss += loss.item()
-    return total_loss / len(data_loader)
-
 def compute_reachable_items(users, user_seed_dict, path_dict, item_freq, power):
     """
     For each user, find reachable items via KG paths and compute a pseudo-label distribution.
@@ -77,3 +54,45 @@ def compute_reachable_items(users, user_seed_dict, path_dict, item_freq, power):
         cdf = (freq / freq.sum()).cumsum()
         reachable[user] = (udst.tolist(), cdf.tolist())
     return reachable
+
+def train_epoch(model, data_loader, optimizer):
+    model.train()
+    total_loss = 0.0
+    for batch in data_loader:
+        users, items, labels, neg_mask, plabel_mask = batch
+        users = users.to(device); items = items.to(device)
+        labels = labels.to(device); neg_mask = neg_mask.to(device); plabel_mask = plabel_mask.to(device)
+
+        optimizer.zero_grad()
+        scores = model(users, items)  # [batch]
+        # Compute losses as above
+        loss_fn = nn.BCEWithLogitsLoss(reduction='none')
+        loss_all = loss_fn(scores, labels)
+        loss_obs = (loss_all * (1 - neg_mask) * (1 - plabel_mask)).mean()
+        loss_neg = (loss_all * neg_mask).mean()
+        loss_pl  = (loss_all * plabel_mask).mean()
+        loss = loss_obs + loss_neg + loss_pl
+
+        loss.backward()
+        optimizer.step()
+        total_loss += loss.item()
+    return total_loss / len(data_loader)
+
+def train_loop(model, data_loader, optimizer, config):
+    model.train()
+    total_loss = 0.
+    for batch in data_loader:
+        user = batch['user'].to(config.device)
+        item = batch['item'].to(config.device)
+        label = batch['label'].float().to(config.device)
+        neg_mask = batch['neg_mask'].to(config.device)
+        plabel_mask = batch['plabel_mask'].to(config.device)
+
+        optimizer.zero_grad()
+        scores = model(user, item, masks={'neg_mask': neg_mask, 'plabel_mask': plabel_mask})
+        loss = F.binary_cross_entropy_with_logits(scores, label)
+        # Optionally weight losses by masks for observed/unobserved/pseudo-labeled
+        loss.backward()
+        optimizer.step()
+        total_loss += loss.item()
+    return total_loss / len(data_loader)
