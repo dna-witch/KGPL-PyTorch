@@ -27,7 +27,7 @@ class SumAggregator(nn.Module):
         self.dim = dim
         self.dropout = dropout
         self.act = act_fn
-        # Weight and bias parameters (like a graph conv)&#8203;:contentReference[oaicite:16]{index=16}.
+        # Weight and bias parameters (like a graph conv)
         self.weight = nn.Parameter(torch.empty(dim, dim))
         self.bias = nn.Parameter(torch.zeros(dim))
         nn.init.xavier_uniform_(self.weight)
@@ -39,17 +39,17 @@ class SumAggregator(nn.Module):
         neighbor_relations: [batch, k, num_neighbors, dim] (relation embeddings)
         user_embeddings: [batch, dim] (user embedding)
         """
-        # 1) Compute attention scores for neighbors based on (user * relation)&#8203;:contentReference[oaicite:17]{index=17}.
+        # 1) Compute attention scores for neighbors based on (user * relation)
         batch_size = user_embeddings.size(0)
         # Expand user to [batch, 1, 1, dim] to match neighbor_relations
         u = user_embeddings.view(batch_size, 1, 1, self.dim)
-        # Compute score = softmax( <user, neighbor_relation> ) along neighbors&#8203;:contentReference[oaicite:18]{index=18}.
+        # Compute score = softmax( <user, neighbor_relation> ) along neighbors
         scores = torch.softmax((u * neighbor_relations).mean(dim=-1), dim=-1)  # [batch, k, num_neighbors]
         scores = scores.unsqueeze(-1)  # [batch, k, num_neighbors, 1]
-        # 2) Weighted average of neighbor vectors&#8203;:contentReference[oaicite:19]{index=19}.
+        # 2) Weighted average of neighbor vectors
         neigh_agg = (scores * neighbor_vectors).sum(dim=2)  # [batch, k, dim]
         neigh_agg = F.dropout(neigh_agg, p=self.dropout, training=self.training)
-        # 3) Sum with self vectors and apply linear + activation&#8203;:contentReference[oaicite:20]{index=20}.
+        # 3) Sum with self vectors and apply linear + activation.
         output = self_vectors + neigh_agg  # [batch, k, dim]
         output = output.view(-1, self.dim)  # flatten [batch*k, dim]
         output = output @ self.weight + self.bias  # linear transform
@@ -105,7 +105,7 @@ class KGPLStudent(nn.Module):
         for i in range(self.config.n_iter):
             aggregator = self.aggregators[i]
             next_x = []
-            # For each depth hop, aggregate (like TensorFlow loop&#8203;:contentReference[oaicite:15]{index=15})
+            # For each depth hop, aggregate (like TensorFlow loop)
             for hop in range(self.config.n_iter - i):
                 self_vecs = x[hop]
                 neigh_vecs = x[hop+1].view(batch_size, -1, self.config.neighbor_sample_size, self.emb_dim)

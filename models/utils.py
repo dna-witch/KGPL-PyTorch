@@ -48,7 +48,7 @@ def train_epoch(model, data_loader, optimizer):
 def compute_reachable_items(users, user_seed_dict, path_dict, item_freq, power):
     """
     For each user, find reachable items via KG paths and compute a pseudo-label distribution.
-    This is adapted from compute_reachable_items_&#8203;:contentReference[oaicite:8]{index=8}.
+    This is adapted from compute_reachable_items_.
     Returns: dict of user -> (item_list, cumulative_probs)
     """
     reachable = {}
