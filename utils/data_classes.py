@@ -86,10 +86,10 @@ class KGPLExperiment():
     self.cfg = cfg
     # set paths
     self.data_path = KGPLExperiment.base_data_path + exp_name + '/'
-    self.adj_entity_path = self.data_path + 'adj_entity.npy'
-    self.adj_relation_path = self.data_path + 'adj_relation.npy'
+    self.adj_entity_path = self.data_path + 'adj_entity_5_32.npy'
+    self.adj_relation_path = self.data_path + 'adj_relation_5_32.npy'
     self.ratings_path = self.data_path + 'ratings_final.npy'
-    self.path_list_path = self.data_path + 'path_list.pkl'
+    self.path_list_path = self.data_path + 'path_list_5_32.pkl'
     # load from paths
     print('Loading Entity Adjacencies...')
     self.adj_entity = torch.from_numpy(np.load(self.adj_entity_path))
@@ -123,6 +123,8 @@ class KGPLExperiment():
     self.set_item_candidates()
     self.n_user = self.train_dataset.n_user
     self.n_item = self.train_dataset.n_item
+    # return train_dataset, val_dataset, test_dataset
+    # return train_ratings, val_ratings, test_ratings
 
   @staticmethod
   def _build_freq_dict(seq, all_candidates): # need all_candidates
@@ -133,24 +135,19 @@ class KGPLExperiment():
     freq = [_freq[i] for i in all_candidates]
     return dict(zip(all_candidates, freq))
 
+  #### THIS IS THE BIG ONE #####
   def set_item_candidates(self):
       """
       Construct the sampling distrbiutions for negative/pseudo-labelled instances for each user
       """
-    
       train_data = self.train_dataset.ratings
       eval_data = self.val_dataset.ratings
 
-      # self.user_seed_dict = defaultdict(set)
-
-      # all_users = tuple(set(train_data[:, 0])) # train data sets the users - not predicting unseen users
       all_users = torch.unique(train_data[:,0])
       all_items = torch.unique(train_data[:,1])
       n_user = len(all_users)
       n_item = len(all_items)
       self.user_seed_dict = defaultdict(set)
-      # print('All Users (In Training Set):', len(all_users))
-      # self.train_users = all_users
       self.all_items = set(torch.arange(n_item))
       self.neg_c_dict_user = self._build_freq_dict(
           torch.concat([train_data[:, 0], eval_data[:, 0]]), all_users
@@ -175,7 +172,6 @@ class KGPLExperiment():
       for u, i in tqdm(train_data[:, 0:2]):
           self.user_seed_dict[u.item()].add(i.item())
 
-
       item_dist_dict = {}
       src_itr = map(
           lambda iu: (
@@ -190,8 +186,11 @@ class KGPLExperiment():
 
       grouped = grouper(self.cfg['plabel_chunk_size'], src_itr, squash=set([2, 3]))
 
-      # --------- got rid of multiprocessing --------
-    
+      # --------- commented out multiprocessing --------
+      # with mp.Pool(self.cfg.plabel_par) as pool:
+      #     for idd in pool.imap_unordered(compute_reachable_items_, grouped):
+      #         item_dist_dict.update(idd)
+      #         print(idd)
       print('Populating item dist dict...')
       item_dist_dict = {}
       for group in tqdm(grouped):
@@ -199,3 +198,41 @@ class KGPLExperiment():
           idd = compute_reachable_items_(group)
           item_dist_dict.update(idd)
       self.train_dataset.item_dist_dict = item_dist_dict
+
+    @staticmethod
+    def train_collate_fn(batch):
+    users, pos_items, neg_items, pseudo_labels = zip(*batch)
+    return (
+        torch.stack(users),
+        torch.stack(pos_items),
+        torch.stack(neg_items),
+        torch.stack(pseudo_labels),
+    )
+
+    def create_dataloaders(self):
+      self.train_loader = DataLoader(
+          self.train_dataset,
+          batch_size=self.cfg['optimize']['batch_size'],
+          shuffle=True,
+          # num_workers=4,
+          pin_memory=True,
+          drop_last=False
+      )
+
+      self.val_loader = DataLoader(
+          self.val_dataset,
+          batch_size=self.cfg['optimize']['batch_size'],
+          shuffle=False,
+          # num_workers=4,
+          pin_memory=True,
+          drop_last=False
+      )
+
+      self.test_loader = DataLoader(
+          self.test_dataset,
+          batch_size=self.cfg['optimize']['batch_size'],
+          shuffle=False,
+          # num_workers=4,
+          pin_memory=True,""
+          drop_last=False
+      )
