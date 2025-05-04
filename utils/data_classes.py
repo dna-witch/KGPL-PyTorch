@@ -214,7 +214,6 @@ class KGPLExperiment():
           self.train_dataset,
           batch_size=self.cfg['optimize']['batch_size'],
           shuffle=True,
-          # num_workers=4,
           pin_memory=True,
           drop_last=False
       )
@@ -223,7 +222,6 @@ class KGPLExperiment():
           self.val_dataset,
           batch_size=self.cfg['optimize']['batch_size'],
           shuffle=False,
-          # num_workers=4,
           pin_memory=True,
           drop_last=False
       )
@@ -232,7 +230,6 @@ class KGPLExperiment():
           self.test_dataset,
           batch_size=self.cfg['optimize']['batch_size'],
           shuffle=False,
-          # num_workers=4,
-          pin_memory=True,""
+          pin_memory=True,
           drop_last=False
       )
