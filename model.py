@@ -204,9 +204,19 @@ class KGPLStudent(nn.Module):
 
 # <----- KGPL Co-Training Model ----->
 class KGPLCOT(nn.Module):
-    def __init__(self, cfg, n_user, n_item, n_entity, n_relation, adj_entity, adj_relation, path_list_dict, train_data, eval_data, device):
+    def __init__(self, exp_obj, device):
         super().__init__()
-        _cfg = deepcopy(cfg)
+        n_user = exp_obj.n_user
+        n_item = exp_obj.n_item
+        n_entity = exp_obj.n_entity
+        n_relation = exp_obj.n_entity
+        adj_entity = exp_obj.adj_entity
+        adj_relation = exp_obj.adj_relation
+        path_list_dict = exp_obj.path_list_dict
+        train_data = exp_obj.train_loader
+        eval_data = exp_obj.val_loader
+        
+        _cfg = deepcopy(exp_obj.cfg)
         self.device = device
 
         self.model_f = KGPLStudent(n_user, n_entity, n_relation, adj_entity, adj_relation, _cfg, device)
