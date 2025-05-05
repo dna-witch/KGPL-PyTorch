@@ -4,8 +4,10 @@ class KGPLDataset(Dataset):
   def __init__(self, ratings):
     super().__init__()
     self.ratings = ratings
-    self.users = torch.arange(len(torch.unique(self.ratings[:,0])))
-    self.items = torch.arange(len(torch.unique(self.ratings[:,1])))
+    # self.users = torch.arange(len(torch.unique(self.ratings[:,0])))
+    # self.items = torch.arange(len(torch.unique(self.ratings[:,1])))
+    self.users = torch.unique(self.ratings[:,0])
+    self.items = torch.unique(self.ratings[:,1])
     self.n_user = len(self.users)
     self.n_item = len(self.items)
 
