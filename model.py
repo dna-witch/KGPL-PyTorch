@@ -206,8 +206,8 @@ class KGPLStudent(nn.Module):
 class KGPLCOT(nn.Module):
     def __init__(self, exp_obj, device):
         super().__init__()
-        n_user = exp_obj.n_user
-        n_item = exp_obj.n_item
+        n_user = int(music.ratings[:, 0].max().item()) + 1,
+        n_item = int(music.ratings[:, 1].max().item()) + 1,
         n_entity = exp_obj.n_entity
         n_relation = exp_obj.n_entity
         adj_entity = exp_obj.adj_entity
