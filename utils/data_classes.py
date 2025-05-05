@@ -1,4 +1,9 @@
 from torch.utils.data import Dataset, DataLoader
+import random
+import torch
+import numpy as np
+from functions import *
+
 
 class KGPLDataset(Dataset):
   def __init__(self, ratings):
@@ -203,37 +208,37 @@ class KGPLExperiment():
           item_dist_dict.update(idd)
       self.train_dataset.item_dist_dict = item_dist_dict
 
-    @staticmethod
-    def train_collate_fn(batch):
-    users, pos_items, neg_items, pseudo_labels = zip(*batch)
-    return (
-        torch.stack(users),
-        torch.stack(pos_items),
-        torch.stack(neg_items),
-        torch.stack(pseudo_labels),
-    )
+      @staticmethod
+      def train_collate_fn(batch):
+        users, pos_items, neg_items, pseudo_labels = zip(*batch)
+        return (
+            torch.stack(users),
+            torch.stack(pos_items),
+            torch.stack(neg_items),
+            torch.stack(pseudo_labels),
+        )
 
-    def create_dataloaders(self):
-      self.train_loader = DataLoader(
-          self.train_dataset,
-          batch_size=self.cfg['optimize']['batch_size'],
-          shuffle=True,
+        def create_dataloaders(self):
+          self.train_loader = DataLoader(
+              self.train_dataset,
+              batch_size=self.cfg['optimize']['batch_size'],
+              shuffle=True,
+              pin_memory=True,
+              drop_last=False
+          )
+
+          self.val_loader = DataLoader(
+              self.val_dataset,
+              batch_size=self.cfg['optimize']['batch_size'],
+              shuffle=False,
+              pin_memory=True,
+              drop_last=False
+          )
+
+          self.test_loader = DataLoader(
+              self.test_dataset,
+              batch_size=self.cfg['optimize']['batch_size'],
+              shuffle=False,
           pin_memory=True,
           drop_last=False
-      )
-
-      self.val_loader = DataLoader(
-          self.val_dataset,
-          batch_size=self.cfg['optimize']['batch_size'],
-          shuffle=False,
-          pin_memory=True,
-          drop_last=False
-      )
-
-      self.test_loader = DataLoader(
-          self.test_dataset,
-          batch_size=self.cfg['optimize']['batch_size'],
-          shuffle=False,
-          pin_memory=True,
-          drop_last=False
-      )
+          )
