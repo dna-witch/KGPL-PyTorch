@@ -89,7 +89,7 @@ class KGPLTrainDataset(KGPLDataset):
       return user, pos_item, neg_item, pseudo_label
 
 class KGPLExperiment():
-  base_data_path = 'KGPL/data/'
+  base_data_path = 'KGPL-PyTorch/data/'
   def __init__(self, exp_name, cfg):
     self.exp_name = exp_name
     self.cfg = cfg
