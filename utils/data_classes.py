@@ -237,27 +237,27 @@ class KGPLExperiment():
             torch.stack(pseudo_labels),
         )
 
-        def create_dataloaders(self):
-          self.train_loader = DataLoader(
-              self.train_dataset,
-              batch_size=self.cfg['optimize']['batch_size'],
-              shuffle=True,
-              pin_memory=True,
-              drop_last=False
-          )
-
-          self.val_loader = DataLoader(
-              self.val_dataset,
-              batch_size=self.cfg['optimize']['batch_size'],
-              shuffle=False,
-              pin_memory=True,
-              drop_last=False
-          )
-
-          self.test_loader = DataLoader(
-              self.test_dataset,
-              batch_size=self.cfg['optimize']['batch_size'],
-              shuffle=False,
-          pin_memory=True,
-          drop_last=False
-          )
+      def create_dataloaders(self):
+        self.train_loader = DataLoader(
+            self.train_dataset,
+            batch_size=self.cfg['optimize']['batch_size'],
+            shuffle=True,
+            pin_memory=True,
+            drop_last=False
+        )
+  
+        self.val_loader = DataLoader(
+            self.val_dataset,
+            batch_size=self.cfg['optimize']['batch_size'],
+            shuffle=False,
+            pin_memory=True,
+            drop_last=False
+        )
+  
+        self.test_loader = DataLoader(
+            self.test_dataset,
+            batch_size=self.cfg['optimize']['batch_size'],
+            shuffle=False,
+        pin_memory=True,
+        drop_last=False
+        )
