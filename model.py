@@ -1,3 +1,9 @@
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from copy import deepcopy
+from abc import ABC, abstractmethod
+
 def kgpl_loss(pos_scores, neg_scores, pseudo_scores):
     # BCE loss like TensorFlow version
     pos_labels = torch.ones_like(pos_scores)
