@@ -1,3 +1,5 @@
+from torch.utils.data import Dataset, DataLoader
+
 class KGPLDataset(Dataset):
   def __init__(self, ratings):
     super().__init__()
@@ -86,10 +88,10 @@ class KGPLExperiment():
     self.cfg = cfg
     # set paths
     self.data_path = KGPLExperiment.base_data_path + exp_name + '/'
-    self.adj_entity_path = self.data_path + 'adj_entity_5_32.npy'
-    self.adj_relation_path = self.data_path + 'adj_relation_5_32.npy'
+    self.adj_entity_path = self.data_path + 'adj_entity.npy'
+    self.adj_relation_path = self.data_path + 'adj_relation.npy'
     self.ratings_path = self.data_path + 'ratings_final.npy'
-    self.path_list_path = self.data_path + 'path_list_5_32.pkl'
+    self.path_list_path = self.data_path + 'path_list.pkl'
     # load from paths
     print('Loading Entity Adjacencies...')
     self.adj_entity = torch.from_numpy(np.load(self.adj_entity_path))
