@@ -2,7 +2,7 @@ from torch.utils.data import Dataset, DataLoader
 import random
 import torch
 import numpy as np
-from functions import *
+from .functions import *
 
 
 class KGPLDataset(Dataset):
