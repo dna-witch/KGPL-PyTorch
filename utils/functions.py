@@ -1,3 +1,8 @@
+import itertools
+from tqdm import tqdm
+from collections import Counter
+import numpy as np
+
 def grouper(n, iterable, squash=None):
     it = iter(iterable)
     while True:
