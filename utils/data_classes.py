@@ -112,10 +112,10 @@ class KGPLExperiment():
 
     
     self.data_path = KGPLExperiment.base_data_path + exp_name + '/'
-    self.adj_entity_path = self.data_path + f"adj_entity_{cfg['lp_depth']}_{cfg['num_neighbor_samples']}.npy"
-    self.adj_relation_path = self.data_path + f"adj_relation_{cfg['lp_depth']}_{cfg['num_neighbor_samples']}.npy"
+    self.adj_entity_path = self.data_path + f"adj_entity_{cfg['plabel_lp_depth']}_{cfg['model']['num_neighbor_samples']}.npy"
+    self.adj_relation_path = self.data_path + f"adj_relation_{cfg['plabel_lp_depth']}_{cfg['model']['num_neighbor_samples']}.npy"
     self.ratings_path = self.data_path + 'ratings_final.npy'
-    self.path_list_path = self.data_path + f"path_list_{cfg['lp_depth']}_{cfg['num_neighbor_samples']}.pkl"
+    self.path_list_path = self.data_path + f"path_list_{cfg['plabel_lp_depth']}_{cfg['model']['num_neighbor_samples']}.pkl"
     # load from paths
     print('Loading Entity Adjacencies...')
     self.adj_entity = torch.from_numpy(np.load(self.adj_entity_path))
