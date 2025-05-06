@@ -1,3 +1,7 @@
+import numpy as np
+import tqdm
+import torch
+
 def get_user_record(data, is_train):
     user_history_dict = dict()
     for interaction in data:
