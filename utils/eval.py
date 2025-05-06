@@ -1,5 +1,5 @@
 import numpy as np
-import tqdm
+from tqdm import tqdm
 import torch
 
 def get_user_record(data, is_train):
