@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from tqdm import tqdm
 import torch
 
@@ -115,3 +116,15 @@ def run_topk_eval(
     print("\nTop-K Evaluation Results")
     for k, p, r in zip(k_list, precision, recall):
         print(f"K={k:>3} | Precision: {p:.4f} | Recall: {r:.4f}")
+    
+    
+    # Create a dictionary to store the results in the desired format
+    results = {}
+    for k, p, r in zip(k_list, precision, recall):
+        results[f'K={k} Precision'] = p
+        results[f'K={k} Recall'] = r
+
+    print('Making row.')
+
+    # Create a pandas dataframe with the results
+    return pd.DataFrame(results, index=[0])
