@@ -128,7 +128,7 @@ def main(cfg):
     kg = prepare_kg(kg_path)
 
     # contruct adjecency matrix 
-    adj_entity, adj_relation = construct_adj_random(kg, cfg.num_neighbor_samples)
+    adj_entity, adj_relation = construct_adj_random(kg, cfg.num_neighbor_samples, rngs[0])
 
     # path finding based on BFS
     # results = joblib.Parallel(n_jobs=32, verbose=10, backend="multiprocessing")(
