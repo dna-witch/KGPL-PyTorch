@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# The KGPL folder with the original TensorFlow code is not needed
+KGPL/
+
 # C extensions
 *.so
 

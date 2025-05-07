@@ -1,0 +1,379 @@
+Epoch 1
+100%|██████████| 100/100 [01:13<00:00,  1.35it/s]
+Train Loss - f: 5.0054, g: 4.9993
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:14<00:00, 70.67it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0000 | Recall: 0.0000
+K=  2 | Precision: 0.0005 | Recall: 0.0005
+K=  5 | Precision: 0.0006 | Recall: 0.0010
+K= 10 | Precision: 0.0004 | Recall: 0.0015
+K= 20 | Precision: 0.0004 | Recall: 0.0042
+
+Epoch 2
+100%|██████████| 100/100 [01:09<00:00,  1.44it/s]
+Train Loss - f: 2.2416, g: 2.2416
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:13<00:00, 76.84it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0000 | Recall: 0.0000
+K=  2 | Precision: 0.0000 | Recall: 0.0000
+K=  5 | Precision: 0.0002 | Recall: 0.0005
+K= 10 | Precision: 0.0003 | Recall: 0.0018
+K= 20 | Precision: 0.0003 | Recall: 0.0036
+
+Epoch 3
+100%|██████████| 100/100 [01:08<00:00,  1.45it/s]
+Train Loss - f: 2.2395, g: 2.2320
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:12<00:00, 82.54it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0000 | Recall: 0.0000
+K=  2 | Precision: 0.0000 | Recall: 0.0000
+K=  5 | Precision: 0.0006 | Recall: 0.0014
+K= 10 | Precision: 0.0005 | Recall: 0.0023
+K= 20 | Precision: 0.0006 | Recall: 0.0053
+
+Epoch 4
+100%|██████████| 100/100 [01:08<00:00,  1.46it/s]
+Train Loss - f: 2.2350, g: 2.2321
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:13<00:00, 75.28it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0000 | Recall: 0.0000
+K=  2 | Precision: 0.0005 | Recall: 0.0002
+K=  5 | Precision: 0.0006 | Recall: 0.0009
+K= 10 | Precision: 0.0003 | Recall: 0.0009
+K= 20 | Precision: 0.0004 | Recall: 0.0034
+
+Epoch 5
+100%|██████████| 100/100 [01:08<00:00,  1.46it/s]
+Train Loss - f: 2.2332, g: 2.2303
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:12<00:00, 79.50it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0010 | Recall: 0.0003
+K=  2 | Precision: 0.0010 | Recall: 0.0006
+K=  5 | Precision: 0.0010 | Recall: 0.0024
+K= 10 | Precision: 0.0008 | Recall: 0.0042
+K= 20 | Precision: 0.0005 | Recall: 0.0054
+
+Epoch 6
+100%|██████████| 100/100 [01:08<00:00,  1.46it/s]
+Train Loss - f: 2.2214, g: 2.2204
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:20<00:00, 49.84it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0010 | Recall: 0.0003
+K=  2 | Precision: 0.0005 | Recall: 0.0003
+K=  5 | Precision: 0.0004 | Recall: 0.0007
+K= 10 | Precision: 0.0006 | Recall: 0.0024
+K= 20 | Precision: 0.0007 | Recall: 0.0057
+
+Epoch 7
+100%|██████████| 100/100 [01:08<00:00,  1.46it/s]
+Train Loss - f: 2.2184, g: 2.2135
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:10<00:00, 91.78it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0020 | Recall: 0.0008
+K=  2 | Precision: 0.0010 | Recall: 0.0008
+K=  5 | Precision: 0.0008 | Recall: 0.0021
+K= 10 | Precision: 0.0005 | Recall: 0.0024
+K= 20 | Precision: 0.0004 | Recall: 0.0041
+
+Epoch 8
+100%|██████████| 100/100 [01:08<00:00,  1.45it/s]
+Train Loss - f: 2.2089, g: 2.2034
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:11<00:00, 84.96it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0000 | Recall: 0.0000
+K=  2 | Precision: 0.0010 | Recall: 0.0008
+K=  5 | Precision: 0.0012 | Recall: 0.0029
+K= 10 | Precision: 0.0013 | Recall: 0.0061
+K= 20 | Precision: 0.0011 | Recall: 0.0096
+
+Epoch 9
+100%|██████████| 100/100 [01:08<00:00,  1.46it/s]
+Train Loss - f: 2.1960, g: 2.1878
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:11<00:00, 88.42it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0000 | Recall: 0.0000
+K=  2 | Precision: 0.0000 | Recall: 0.0000
+K=  5 | Precision: 0.0002 | Recall: 0.0003
+K= 10 | Precision: 0.0008 | Recall: 0.0039
+K= 20 | Precision: 0.0007 | Recall: 0.0066
+
+Epoch 10
+100%|██████████| 100/100 [01:08<00:00,  1.46it/s]
+Train Loss - f: 2.1794, g: 2.1715
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:23<00:00, 42.89it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0000 | Recall: 0.0000
+K=  2 | Precision: 0.0005 | Recall: 0.0005
+K=  5 | Precision: 0.0004 | Recall: 0.0010
+K= 10 | Precision: 0.0003 | Recall: 0.0015
+K= 20 | Precision: 0.0004 | Recall: 0.0028
+
+Epoch 11
+100%|██████████| 100/100 [01:08<00:00,  1.47it/s]
+Train Loss - f: 2.1606, g: 2.1554
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:16<00:00, 61.82it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0000 | Recall: 0.0000
+K=  2 | Precision: 0.0000 | Recall: 0.0000
+K=  5 | Precision: 0.0008 | Recall: 0.0018
+K= 10 | Precision: 0.0006 | Recall: 0.0026
+K= 20 | Precision: 0.0004 | Recall: 0.0035
+
+Epoch 12
+100%|██████████| 100/100 [01:08<00:00,  1.47it/s]
+Train Loss - f: 2.1458, g: 2.1334
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:10<00:00, 91.99it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0010 | Recall: 0.0005
+K=  2 | Precision: 0.0020 | Recall: 0.0019
+K=  5 | Precision: 0.0014 | Recall: 0.0034
+K= 10 | Precision: 0.0009 | Recall: 0.0041
+K= 20 | Precision: 0.0007 | Recall: 0.0058
+
+Epoch 13
+100%|██████████| 100/100 [01:08<00:00,  1.47it/s]
+Train Loss - f: 2.1218, g: 2.1110
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:13<00:00, 71.80it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0000 | Recall: 0.0000
+K=  2 | Precision: 0.0005 | Recall: 0.0003
+K=  5 | Precision: 0.0006 | Recall: 0.0011
+K= 10 | Precision: 0.0010 | Recall: 0.0043
+K= 20 | Precision: 0.0010 | Recall: 0.0101
+
+Epoch 14
+100%|██████████| 100/100 [01:07<00:00,  1.48it/s]
+Train Loss - f: 2.1037, g: 2.0922
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:10<00:00, 91.34it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0020 | Recall: 0.0013
+K=  2 | Precision: 0.0015 | Recall: 0.0018
+K=  5 | Precision: 0.0020 | Recall: 0.0047
+K= 10 | Precision: 0.0016 | Recall: 0.0077
+K= 20 | Precision: 0.0014 | Recall: 0.0123
+
+Epoch 15
+100%|██████████| 100/100 [01:08<00:00,  1.47it/s]
+Train Loss - f: 2.0801, g: 2.0681
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:12<00:00, 81.35it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0020 | Recall: 0.0010
+K=  2 | Precision: 0.0010 | Recall: 0.0010
+K=  5 | Precision: 0.0016 | Recall: 0.0038
+K= 10 | Precision: 0.0020 | Recall: 0.0096
+K= 20 | Precision: 0.0020 | Recall: 0.0176
+
+Epoch 16
+100%|██████████| 100/100 [01:07<00:00,  1.47it/s]
+Train Loss - f: 2.0610, g: 2.0499
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:10<00:00, 95.32it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0050 | Recall: 0.0024
+K=  2 | Precision: 0.0035 | Recall: 0.0029
+K=  5 | Precision: 0.0034 | Recall: 0.0092
+K= 10 | Precision: 0.0033 | Recall: 0.0148
+K= 20 | Precision: 0.0030 | Recall: 0.0273
+
+Epoch 17
+100%|██████████| 100/100 [01:08<00:00,  1.47it/s]
+Train Loss - f: 2.0385, g: 2.0257
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:24<00:00, 40.78it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0090 | Recall: 0.0041
+K=  2 | Precision: 0.0080 | Recall: 0.0069
+K=  5 | Precision: 0.0076 | Recall: 0.0175
+K= 10 | Precision: 0.0061 | Recall: 0.0291
+K= 20 | Precision: 0.0047 | Recall: 0.0441
+
+Epoch 18
+100%|██████████| 100/100 [01:08<00:00,  1.47it/s]
+Train Loss - f: 2.0174, g: 2.0035
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:12<00:00, 82.44it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0120 | Recall: 0.0047
+K=  2 | Precision: 0.0110 | Recall: 0.0110
+K=  5 | Precision: 0.0106 | Recall: 0.0249
+K= 10 | Precision: 0.0080 | Recall: 0.0368
+K= 20 | Precision: 0.0068 | Recall: 0.0628
+
+Epoch 19
+100%|██████████| 100/100 [01:08<00:00,  1.46it/s]
+Train Loss - f: 1.9951, g: 1.9821
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:25<00:00, 39.49it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0120 | Recall: 0.0065
+K=  2 | Precision: 0.0120 | Recall: 0.0108
+K=  5 | Precision: 0.0100 | Recall: 0.0234
+K= 10 | Precision: 0.0111 | Recall: 0.0559
+K= 20 | Precision: 0.0092 | Recall: 0.0908
+
+Epoch 20
+100%|██████████| 100/100 [01:08<00:00,  1.47it/s]
+Train Loss - f: 1.9767, g: 1.9626
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:13<00:00, 75.35it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0190 | Recall: 0.0086
+K=  2 | Precision: 0.0190 | Recall: 0.0202
+K=  5 | Precision: 0.0164 | Recall: 0.0410
+K= 10 | Precision: 0.0138 | Recall: 0.0674
+K= 20 | Precision: 0.0107 | Recall: 0.1073
+
+Epoch 21
+100%|██████████| 100/100 [01:07<00:00,  1.48it/s]
+Train Loss - f: 1.9548, g: 1.9488
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:10<00:00, 91.38it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0250 | Recall: 0.0106
+K=  2 | Precision: 0.0220 | Recall: 0.0225
+K=  5 | Precision: 0.0200 | Recall: 0.0496
+K= 10 | Precision: 0.0171 | Recall: 0.0857
+K= 20 | Precision: 0.0138 | Recall: 0.1361
+
+Epoch 22
+100%|██████████| 100/100 [01:07<00:00,  1.48it/s]
+Train Loss - f: 1.9417, g: 1.9338
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:18<00:00, 53.63it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0300 | Recall: 0.0147
+K=  2 | Precision: 0.0215 | Recall: 0.0217
+K=  5 | Precision: 0.0192 | Recall: 0.0526
+K= 10 | Precision: 0.0181 | Recall: 0.0905
+K= 20 | Precision: 0.0149 | Recall: 0.1453
+
+Epoch 23
+100%|██████████| 100/100 [01:08<00:00,  1.46it/s]
+Train Loss - f: 1.9265, g: 1.9170
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:21<00:00, 46.55it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0240 | Recall: 0.0126
+K=  2 | Precision: 0.0215 | Recall: 0.0226
+K=  5 | Precision: 0.0208 | Recall: 0.0545
+K= 10 | Precision: 0.0192 | Recall: 0.0973
+K= 20 | Precision: 0.0154 | Recall: 0.1490
+
+Epoch 24
+100%|██████████| 100/100 [01:08<00:00,  1.47it/s]
+Train Loss - f: 1.9094, g: 1.9081
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:10<00:00, 95.33it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0320 | Recall: 0.0167
+K=  2 | Precision: 0.0265 | Recall: 0.0255
+K=  5 | Precision: 0.0214 | Recall: 0.0520
+K= 10 | Precision: 0.0193 | Recall: 0.0924
+K= 20 | Precision: 0.0166 | Recall: 0.1624
+
+Epoch 25
+100%|██████████| 100/100 [01:08<00:00,  1.46it/s]
+Train Loss - f: 1.8966, g: 1.8954
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:11<00:00, 84.95it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0250 | Recall: 0.0127
+K=  2 | Precision: 0.0250 | Recall: 0.0245
+K=  5 | Precision: 0.0226 | Recall: 0.0534
+K= 10 | Precision: 0.0181 | Recall: 0.0913
+K= 20 | Precision: 0.0152 | Recall: 0.1511
+
+Epoch 26
+100%|██████████| 100/100 [01:08<00:00,  1.46it/s]
+Train Loss - f: 1.8883, g: 1.8807
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:15<00:00, 63.27it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0290 | Recall: 0.0176
+K=  2 | Precision: 0.0240 | Recall: 0.0272
+K=  5 | Precision: 0.0230 | Recall: 0.0562
+K= 10 | Precision: 0.0198 | Recall: 0.0993
+K= 20 | Precision: 0.0156 | Recall: 0.1508
+
+Epoch 27
+100%|██████████| 100/100 [01:09<00:00,  1.44it/s]
+Train Loss - f: 1.8824, g: 1.8816
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:21<00:00, 46.05it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0290 | Recall: 0.0134
+K=  2 | Precision: 0.0250 | Recall: 0.0240
+K=  5 | Precision: 0.0232 | Recall: 0.0526
+K= 10 | Precision: 0.0202 | Recall: 0.0943
+K= 20 | Precision: 0.0159 | Recall: 0.1519
+
+Epoch 28
+100%|██████████| 100/100 [01:10<00:00,  1.42it/s]
+Train Loss - f: 1.8722, g: 1.8688
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:26<00:00, 37.55it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0260 | Recall: 0.0132
+K=  2 | Precision: 0.0235 | Recall: 0.0235
+K=  5 | Precision: 0.0210 | Recall: 0.0505
+K= 10 | Precision: 0.0198 | Recall: 0.0972
+K= 20 | Precision: 0.0163 | Recall: 0.1535
+
+Epoch 29
+100%|██████████| 100/100 [01:08<00:00,  1.46it/s]
+Train Loss - f: 1.8696, g: 1.8613
+Evaluating model_f:
+Evaluating: 100%|██████████| 1000/1000 [00:19<00:00, 51.36it/s]
+
+Top-K Evaluation Results
+K=  1 | Precision: 0.0250 | Recall: 0.0105
+K=  2 | Precision: 0.0270 | Recall: 0.0247
+K=  5 | Precision: 0.0258 | Recall: 0.0624
+K= 10 | Precision: 0.0221 | Recall: 0.1061
+K= 20 | Precision: 0.0171 | Recall: 0.1719
+
+Epoch 30
+ 25%|██▌       | 25/100 [00:17<00:51,  1.45it/s]
