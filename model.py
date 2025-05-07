@@ -12,9 +12,9 @@ def kgpl_loss(pos_scores, neg_scores, pseudo_scores):
 
     # criterion = nn.BCELoss(reduction='mean')
     
-    loss = F.binary_cross_entropy(pos_scores, pos_labels) + \
-           F.binary_cross_entropy(neg_scores, neg_labels) + \
-           F.binary_cross_entropy(pseudo_scores, pseudo_labels)
+    loss = F.binary_cross_entropy_with_logits(pos_scores, pos_labels) + \
+           F.binary_cross_entropy_with_logits(neg_scores, neg_labels) + \
+           F.binary_cross_entropy_with_logits(pseudo_scores, pseudo_labels)
     return loss
 
 
