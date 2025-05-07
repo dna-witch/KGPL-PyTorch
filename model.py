@@ -9,12 +9,12 @@ def kgpl_loss(pos_scores, neg_scores, pseudo_scores):
     pos_labels = torch.ones_like(pos_scores)
     neg_labels = torch.zeros_like(neg_scores)
     pseudo_labels = torch.ones_like(pseudo_scores)
-    # loss = F.binary_cross_entropy_with_logits(pos_scores, pos_labels) + \
-    #        F.binary_cross_entropy_with_logits(neg_scores, neg_labels) + \
-    #        F.binary_cross_entropy_with_logits(pseudo_scores, pseudo_labels)
-    loss = nn.BCELoss(pos_scores, pos_labels) + \
-           nn.BCELoss(neg_scores, neg_labels) + \
-           nn.BCELoss(pseudo_scores, pseudo_labels)
+
+    criterion = nn.BCELoss(reduction='mean')
+    
+    loss = criterion(pos_scores, pos_labels) + \
+           criterion(neg_scores, neg_labels) + \
+           criterion(pseudo_scores, pseudo_labels)
     return loss
 
 
