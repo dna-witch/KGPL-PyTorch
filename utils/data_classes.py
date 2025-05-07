@@ -41,30 +41,30 @@ class KGPLTrainDataset(KGPLDataset):
     super().__init__(ratings)
     self.user_seed_dict = defaultdict(set)
     self.item_dist_dict = {}
-    self._fix_set_for_positives()
+    # self._fix_set_for_positives()
 
-  def _fix_set_for_positives(self):
-    '''
-    Train set needs at least one positive example per user.
-    '''
-    # Step 1: Get unique groups
-    groups = self.ratings[:, 0].unique()
+  # def _fix_set_for_positives(self):
+  #   '''
+  #   Train set needs at least one positive example per user.
+  #   '''
+  #   # Step 1: Get unique groups
+  #   groups = self.ratings[:, 0].unique()
 
-    # Step 2: Find valid groups
-    valid_groups = []
-    for g in groups:
-        # mask for current group
-        mask = self.ratings[:, 0] == g
-        # check if any third column > 0
-        if (self.ratings[mask][:, 2] > 0).any():
-            valid_groups.append(g)
-    valid_groups = torch.Tensor(valid_groups)
-    self.ratings = self.ratings[(self.ratings[:, 0][:, None] == valid_groups).any(dim=1)]
-    # fix counts
-    self.users = torch.unique(self.ratings[:,0])
-    self.items = torch.unique(self.ratings[:,1])
-    self.n_user = len(self.users)
-    self.n_item = len(self.items)
+  #   # Step 2: Find valid groups
+  #   valid_groups = []
+  #   for g in groups:
+  #       # mask for current group
+  #       mask = self.ratings[:, 0] == g
+  #       # check if any third column > 0
+  #       if (self.ratings[mask][:, 2] > 0).any():
+  #           valid_groups.append(g)
+  #   valid_groups = torch.Tensor(valid_groups)
+  #   self.ratings = self.ratings[(self.ratings[:, 0][:, None] == valid_groups).any(dim=1)]
+  #   # fix counts
+  #   self.users = torch.unique(self.ratings[:,0])
+  #   self.items = torch.unique(self.ratings[:,1])
+  #   self.n_user = len(self.users)
+  #   self.n_item = len(self.items)
 
   def sample_negative(self, user):
       seen = torch.unique(self.ratings[(self.ratings[:,0] == user)][:,1])
@@ -144,6 +144,7 @@ class KGPLExperiment():
 
   def train_val_test_split(self):
     exp_ratings, test_ratings = self._split_data(self.ratings)
+    exp_ratings = exp_ratings[exp_ratings[:, 2]==1] #replaced function
     train_ratings, val_ratings = self._split_data(exp_ratings)
     self.train_dataset = KGPLTrainDataset(train_ratings)
     self.val_dataset = KGPLDataset(val_ratings)
