@@ -124,7 +124,5 @@ def run_topk_eval(
         results[f'Precision@{k}'] = p
         results[f'Recall@{k}'] = r
 
-    print('Making row.')
-
     # Create a pandas dataframe with the results
     return pd.DataFrame(results, index=[0])
