@@ -127,7 +127,7 @@ def main(cfg):
     kg_path = hydra.utils.to_absolute_path(cfg.kg_path)
     kg = prepare_kg(kg_path)
 
-    # contruct adjecency matrix 
+    # contruct adjecency matrix
     adj_entity, adj_relation = construct_adj_random(kg, cfg.num_neighbor_samples, rngs[0])
 
     # path finding based on BFS
