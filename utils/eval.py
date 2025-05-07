@@ -121,8 +121,8 @@ def run_topk_eval(
     # Create a dictionary to store the results in the desired format
     results = {}
     for k, p, r in zip(k_list, precision, recall):
-        results[f'K={k} Precision'] = p
-        results[f'K={k} Recall'] = r
+        results[f'Precision@{k}'] = p
+        results[f'Recall@{k}'] = r
 
     print('Making row.')
 
