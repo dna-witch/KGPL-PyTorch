@@ -127,16 +127,16 @@ def main(cfg):
     kg_path = hydra.utils.to_absolute_path(cfg.kg_path)
     kg = prepare_kg(kg_path)
 
-    # contruct adjecency matrix
+    # contruct adjacency matrix
     adj_entity, adj_relation = construct_adj_random(kg, cfg.num_neighbor_samples, rngs[0])
 
     # path finding based on BFS
-    # results = joblib.Parallel(n_jobs=32, verbose=10, backend="multiprocessing")(
-    #     [joblib.delayed(get_paths)(i) for i in all_items]
-    # )
-    results = Parallel(n_jobs=32, backend="multiprocessing")(
-    delayed(get_paths)(i, rngs[idx]) for idx, i in enumerate(all_items)
+    results = Parallel(n_jobs=32, verbose=10, backend="multiprocessing")(
+        [delayed(get_paths)(i) for i in all_items]
     )
+    # results = Parallel(n_jobs=32, backend="multiprocessing")(
+    # delayed(get_paths)(i, rngs[idx]) for idx, i in enumerate(all_items)
+    # )
     path_set_list = list(map(itemgetter(0), results))
 
     save_dir = Path("data") / cfg.dataset
