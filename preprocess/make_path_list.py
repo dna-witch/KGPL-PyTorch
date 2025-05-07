@@ -1,6 +1,8 @@
 import numpy as np
+from numpy.random import default_rng, SeedSequence
 import pickle
 import joblib
+from joblib import Parallel, delayed
 import hydra
 from collections import defaultdict
 from pathlib import Path
@@ -51,7 +53,7 @@ def construct_adj(kg):
     return adj_entity, adj_relation
 
 
-def construct_adj_random(kg, num_neighbor_samples):
+def construct_adj_random(kg, num_neighbor_samples, rng):
     global adj_entity
     global adj_relation
 
@@ -63,11 +65,11 @@ def construct_adj_random(kg, num_neighbor_samples):
         neighbors = kg[entity]
         n_neighbors = len(neighbors)
         if n_neighbors >= num_neighbor_samples:
-            sampled_indices = np.random.choice(
+            sampled_indices = rng.choice(
                 list(range(n_neighbors)), size=num_neighbor_samples, replace=False
             )
         else:
-            sampled_indices = np.random.choice(
+            sampled_indices = rng.choice(
                 list(range(n_neighbors)), size=num_neighbor_samples, replace=True
             )
         adj_entity[entity] = np.array([neighbors[i][0] for i in sampled_indices])
@@ -89,7 +91,7 @@ def get_paths(seed_item):
     while len(queue) > 0:
         pt = queue.pop(0)
         e = pt[-1]
-        next_e = list(set(adj_entity[e]))
+        next_e = sorted(set(adj_entity[e]))  # BFS queue processes neighbors in fixed, sorted order for consistent results
         for ne in next_e:
             if ne == -1 and (len(pt) > 1 and ne == pt[-2]):
                 continue
@@ -115,6 +117,13 @@ def main(cfg):
     rating_path = hydra.utils.to_absolute_path(cfg.rating_path)
     all_items = get_all_items(rating_path)
 
+    # <----- Reproducibility ----->
+    ss = SeedSequence(2021)  # maybe add 2021 as seed in config file?
+    # Spawn child seed sequences for each parallel process
+    child_seeds = ss.spawn(len(all_items))
+    rngs = [default_rng(seed) for seed in child_seeds]
+
+
     kg_path = hydra.utils.to_absolute_path(cfg.kg_path)
     kg = prepare_kg(kg_path)
 
@@ -122,8 +131,11 @@ def main(cfg):
     adj_entity, adj_relation = construct_adj_random(kg, cfg.num_neighbor_samples)
 
     # path finding based on BFS
-    results = joblib.Parallel(n_jobs=32, verbose=10, backend="multiprocessing")(
-        [joblib.delayed(get_paths)(i) for i in all_items]
+    # results = joblib.Parallel(n_jobs=32, verbose=10, backend="multiprocessing")(
+    #     [joblib.delayed(get_paths)(i) for i in all_items]
+    # )
+    results = Parallel(n_jobs=32, backend="multiprocessing")(
+    delayed(get_paths)(i, rngs[idx]) for idx, i in enumerate(all_items)
     )
     path_set_list = list(map(itemgetter(0), results))
 
