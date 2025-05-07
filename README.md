@@ -8,7 +8,7 @@ A PyTorch implementation of KGPL. (https://arxiv.org/abs/2011.05061)
 
 First, identify the last commit hash recorded in `CHANGELOG.md`. Then, use the following command (replacing `LAST_COMMIT_HASH` with the actual hash):
 
->git log --pretty=format:"## %h%n #### %ad %n%n%s%n%n%b%n" --date=short LAST_COMMIT_HASH..HEAD >> CHANGELOG.md
+> git log --pretty=format:"## %h%n #### %ad %n%n%s%n%n%b%n" --date=short LAST_COMMIT_HASH..HEAD >> CHANGELOG.md
 
 This appends all new commits since `LAST_COMMIT_HASH` to the end of the changelog.
 
