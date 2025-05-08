@@ -145,6 +145,10 @@ class KGPLStudent(nn.Module):
         self.relation_emb = nn.Embedding(n_relation, config['emb_dim'])
         self.emb_dim = config['emb_dim']
 
+        nn.init.xavier_uniform_(self.user_emb.weight)
+        nn.init.xavier_uniform_(self.entity_emb.weight)
+        nn.init.xavier_uniform_(self.relation_emb.weight)
+
         # Pre-build aggregators for each hop
         self.aggregators = nn.ModuleList([
             SumAggregatorWithDropout(config['optimize']['batch_size'], config['emb_dim'],
