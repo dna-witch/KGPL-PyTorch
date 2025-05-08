@@ -67,11 +67,8 @@ class KGPLTrainDataset(KGPLDataset):
   Attributes: 
     user_seed_dict (defaultdict): A dictionary mapping each user to a set of items they have interacted with.
     item_dist_dict (dict): A dictionary mapping each user to a tuple containing the reachable items and their corresponding distribution.
-    _fix_set_for_positives(): A method to ensure that each user has at least one positive example in the training set.
-
+    
   Methods:
-    _fix_set_for_positives(): 
-      A method to ensure that each user has at least one positive example in the training set.
     sample_negative(user):
       Samples a negative item for a given user that they have not interacted with.
     sample_pseudo_label(user):
@@ -81,40 +78,6 @@ class KGPLTrainDataset(KGPLDataset):
     super().__init__(ratings)
     self.user_seed_dict = defaultdict(set)
     self.item_dist_dict = {}
-    self._fix_set_for_positives()
-
-  def _fix_set_for_positives(self):
-    """
-    Ensures that each user has at least one positive example in the training set.
-
-    Steps:
-    1. Get unique groups (users) from the ratings data.
-    2. For each group, check if there is at least one positive rating (rating > 0). Add valid groups to a list.
-    3. Filter the ratings data to include only valid groups.
-    4. Update the user and item tensors based on the filtered ratings data.
-    5. Update the number of unique users and items.
-    
-    This is important for ensuring that the training set is valid and contains meaningful data for training.
-    """
-
-    # Step 1: Get unique groups
-    groups = self.ratings[:, 0].unique()
-
-    # Step 2: Find valid groups
-    valid_groups = []
-    for g in groups:
-        # mask for current group
-        mask = self.ratings[:, 0] == g
-        # check if any third column > 0
-        if (self.ratings[mask][:, 2] > 0).any():
-            valid_groups.append(g)
-    valid_groups = torch.Tensor(valid_groups)
-    self.ratings = self.ratings[(self.ratings[:, 0][:, None] == valid_groups).any(dim=1)]
-    # fix counts
-    self.users = torch.unique(self.ratings[:,0])
-    self.items = torch.unique(self.ratings[:,1])
-    self.n_user = len(self.users)
-    self.n_item = len(self.items)
 
   def sample_negative(self, user):
     """
