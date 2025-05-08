@@ -126,3 +126,25 @@ def run_topk_eval(
 
     # Create a pandas dataframe with the results
     return pd.DataFrame(results, index=[0])
+
+def cold_start_eval(model, exp, n_items, device):
+    # Get unique values and their counts
+    unique_users, counts = torch.unique(exp.train_dataset.ratings[:,0], return_counts=True)
+
+    # Select values with count <= n_items
+    cold_starters = unique_users[counts <= n_items]
+
+    cold_mask = torch.isin(exp.test_dataset.ratings[:, 0], cold_starters)
+
+    cold_test_data = exp.test_dataset.ratings[cold_mask]
+
+    return run_topk_eval(
+          model=model,
+          cfg = music.cfg,
+          train_data=exp.train_dataset.ratings.numpy(),
+          eval_data=exp.val_dataset.ratings.numpy(),
+          test_data=cold_test_data.numpy(),
+          n_items=music.n_item,
+          device=device,
+          test_mode=True
+        )
