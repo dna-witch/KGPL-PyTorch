@@ -1,3 +1,4 @@
+import pandas as pd
 import numpy as np
 from tqdm import tqdm
 import torch
@@ -34,7 +35,7 @@ def topk_eval_pytorch(
     batch_size=256,
     return_topk=False,
     sample_size=100
-):
+    ):
     """
     Performs Top-K evaluation for a given model using Precision@K and Recall@K metrics.
 
@@ -143,7 +144,7 @@ def run_topk_eval(
         - Prints Precision@K and Recall@K for all values in `k_list`.
 
     Returns:
-        Prints the evaluation results directly.
+        results (pd.DataFrame): DataFrame containing Precision@K and Recall@K metrics.
     """
     user_num = cfg['evaluate']['user_num_topk']
     if test_mode:
@@ -177,3 +178,48 @@ def run_topk_eval(
     print("\nTop-K Evaluation Results")
     for k, p, r in zip(k_list, precision, recall):
         print(f"K={k:>3} | Precision: {p:.4f} | Recall: {r:.4f}")
+
+    # Create a dictionary to store the results in the desired format
+    results = {}
+    for k, p, r in zip(k_list, precision, recall):
+        results[f'Precision@{k}'] = p
+        results[f'Recall@{k}'] = r
+
+    # Create a pandas dataframe with the results
+    return pd.DataFrame(results, index=[0])
+
+def cold_start_eval(model, exp, n_items, device):
+    """ 
+    Evaluates the recommendation model on cold start users.
+    Cold start users are those who have less than or equal to `n_items` interactions in the training set.
+    
+    Args:
+        model (torch.nn.Module): The trained recommendation model.
+        exp (object): Experiment object containing datasets.
+        n_items (int): Threshold for cold start users.
+        device (torch.device): Device to run model inference on.
+    
+    Returns:
+        pd.DataFrame: DataFrame containing Precision@K and Recall@K metrics for cold start users. 
+            The metrics are calculated using the test dataset via the `run_topk_eval` function.
+    """
+    # Get unique values and their counts
+    unique_users, counts = torch.unique(exp.train_dataset.ratings[:,0], return_counts=True)
+
+    # Select values with count <= n_items
+    cold_starters = unique_users[counts <= n_items]
+
+    cold_mask = torch.isin(exp.test_dataset.ratings[:, 0], cold_starters)
+
+    cold_test_data = exp.test_dataset.ratings[cold_mask]
+
+    return run_topk_eval(
+          model=model,
+          cfg = music.cfg,
+          train_data=exp.train_dataset.ratings.numpy(),
+          eval_data=exp.val_dataset.ratings.numpy(),
+          test_data=cold_test_data.numpy(),
+          n_items=music.n_item,
+          device=device,
+          test_mode=True
+        )
