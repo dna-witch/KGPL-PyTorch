@@ -36,6 +36,12 @@ class KGPLDataset(Dataset):
     self.n_item = len(self.items)
 
   def sample_positive(self, user):
+      """
+      Samples a positively rated item for a given user.
+      This is done by filtering the ratings data for the specified user
+      and selecting an item that has a positive rating (rating >= 1).
+      Otherwise, it raises an error.
+      """
       choice_seq = self.ratings[(self.ratings[:,0] == user) & (self.ratings[:,2]) >= 1][:,1]
       if choice_seq.numel() == 0:
         print('Something went wrong.')
