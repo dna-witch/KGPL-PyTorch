@@ -222,7 +222,7 @@ def cold_start_eval(model, exp, n_items, device):
           train_data=exp.train_dataset.ratings.numpy(),
           eval_data=exp.val_dataset.ratings.numpy(),
           test_data=cold_test_data.numpy(),
-          n_items=music.n_item,
+          n_items=exp.n_item,
           device=device,
           test_mode=True
         )
