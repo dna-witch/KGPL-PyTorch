@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import pandas as pd
 from tqdm import tqdm
 import torch
 
@@ -209,13 +210,15 @@ def cold_start_eval(model, exp, n_items, device):
     # Select values with count <= n_items
     cold_starters = unique_users[counts <= n_items]
 
+    print(f'Cold Starters <= {n_items}:', len(cold_starters))
+
     cold_mask = torch.isin(exp.test_dataset.ratings[:, 0], cold_starters)
 
     cold_test_data = exp.test_dataset.ratings[cold_mask]
 
     return run_topk_eval(
           model=model,
-          cfg = music.cfg,
+          cfg = exp.cfg,
           train_data=exp.train_dataset.ratings.numpy(),
           eval_data=exp.val_dataset.ratings.numpy(),
           test_data=cold_test_data.numpy(),
