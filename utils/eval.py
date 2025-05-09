@@ -140,7 +140,7 @@ def cold_start_eval(model, exp, n_items, device):
 
     return run_topk_eval(
           model=model,
-          cfg = music.cfg,
+          cfg = exp.cfg,
           train_data=exp.train_dataset.ratings.numpy(),
           eval_data=exp.val_dataset.ratings.numpy(),
           test_data=cold_test_data.numpy(),
