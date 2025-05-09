@@ -29,6 +29,9 @@ def kgpl_loss(pos_scores, neg_scores, pseudo_scores):
     pos_labels = torch.ones_like(pos_scores)
     neg_labels = torch.zeros_like(neg_scores)
     pseudo_labels = torch.ones_like(pseudo_scores)
+
+    # criterion = nn.BCELoss(reduction='mean')
+    
     loss = F.binary_cross_entropy_with_logits(pos_scores, pos_labels) + \
            F.binary_cross_entropy_with_logits(neg_scores, neg_labels) + \
            F.binary_cross_entropy_with_logits(pseudo_scores, pseudo_labels)
@@ -255,6 +258,10 @@ class KGPLStudent(nn.Module):
         self.entity_emb = nn.Embedding(n_entity, config['emb_dim'])
         self.relation_emb = nn.Embedding(n_relation, config['emb_dim'])
         self.emb_dim = config['emb_dim']
+
+        # nn.init.xavier_uniform_(self.user_emb.weight)
+        # nn.init.xavier_uniform_(self.entity_emb.weight)
+        # nn.init.xavier_uniform_(self.relation_emb.weight)
 
         # Pre-build aggregators for each hop
         self.aggregators = nn.ModuleList([

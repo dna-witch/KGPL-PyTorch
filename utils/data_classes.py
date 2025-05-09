@@ -219,6 +219,7 @@ class KGPLExperiment():
       - Calls `set_item_candidates()` to configure item candidates for users.
     """
     exp_ratings, test_ratings = self._split_data(self.ratings)
+    exp_ratings = exp_ratings[exp_ratings[:, 2]==1] #replaced function
     train_ratings, val_ratings = self._split_data(exp_ratings)
     self.train_dataset = KGPLTrainDataset(train_ratings)
     self.val_dataset = KGPLDataset(val_ratings)
