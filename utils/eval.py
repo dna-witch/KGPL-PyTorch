@@ -134,7 +134,7 @@ def cold_start_eval(model, exp, n_items, device):
     # Select values with count <= n_items
     cold_starters = unique_users[counts <= n_items]
 
-    print(f'Cold Starters <= {i}:', len(cold_starters))
+    print(f'Cold Starters <= {n_items}:', len(cold_starters))
 
     cold_mask = torch.isin(exp.test_dataset.ratings[:, 0], cold_starters)
 
