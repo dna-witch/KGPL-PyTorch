@@ -1,0 +1,8 @@
+dataset: movie
+data_path: data/movie/fold1.pkl
+rating_path: data/movie/ratings_final.npy
+kg_path: data/movie/kg_final.npy
+pathlist_path: data/movie/path_list_5_32.pkl
+adj_entity_path: data/movie/adj_entity_5_32.npy
+adj_relation_path: data/movie/adj_relation_5_32.npy
+reachable_items_path: data/movie/reachable_items.pkl
