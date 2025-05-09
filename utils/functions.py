@@ -3,7 +3,19 @@ from tqdm import tqdm
 from collections import Counter
 import numpy as np
 
-def grouper(n, iterable, squash=None):
+def grouper(n: int, iterable, squash=None):
+    """
+    Groups elements from an iterable into chunks of size `n`.
+
+    Args:
+        n (int): The size of each chunk.
+        iterable (iterable): The input iterable to group.
+        squash (list[int], optional): Indices of elements to replace with None 
+            in all but the first sub-iterable of each chunk. Defaults to None.
+
+    Yields:
+        list: A chunk of size `n`, padded with None if the iterable is exhausted.
+    """
     it = iter(iterable)
     while True:
         if squash:
@@ -40,6 +52,7 @@ def setup_dst_dict(path_list_dict):
 
 def compute_reachable_items_(args_list):
   """Construct the sampling distributions based on paths in KG.
+
   Args:
       args_list: list of list of arguments. Each arguments' list must contains;
       (1) user_id;
@@ -47,6 +60,7 @@ def compute_reachable_items_(args_list):
       (3) item-to-(item, #paths) dict found in the BFS (start and end points of some paths);
       (4) item-to-frequency dict;
       (5) power coefficient to control the skewness of sampling distributions
+
   Returns:
       dict in which (key, value) = (item list, np.array of sampling distribution).
       sampling distribution is transformed to CDF for fast sampling.

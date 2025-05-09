@@ -15,6 +15,17 @@ THRESHOLD = dict({"book": 0, "music": 0, "movie": 0})
 
 
 def read_item_index_to_entity_id_file():
+    """
+    Reads the item_index2entity_id.txt file for the specified dataset and maps 
+    item indices to new indices and entity IDs to indices.
+
+    The function updates two global dictionaries:
+    - item_index_old2new: Maps old item indices to new sequential indices.
+    - entity_id2index: Maps entity IDs to their corresponding indices.
+
+    The file is expected to be located at "data/<DATASET>/item_index2entity_id.txt" 
+    and should contain tab-separated values with item indices and entity IDs.
+    """
     file = "data/" + DATASET + "/item_index2entity_id.txt"
     print("reading item index to entity id file: " + file + " ...")
     i = 0
@@ -24,9 +35,29 @@ def read_item_index_to_entity_id_file():
         item_index_old2new[item_index] = i
         entity_id2index[satori_id] = i
         i += 1
+    
 
 
 def convert_rating():
+    """
+    Converts raw user-item rating data into a processed format for recommendation tasks.
+    Reads a dataset-specific rating file, filters items based on a predefined set, and 
+    separates user ratings into positive and negative categories based on a threshold. 
+
+    The function generates two output files:
+    1. A final ratings file with positive and negative interactions.
+    2. A raw ratings file with original rating values for positive interactions.
+    Additionally, it maps old user indices to new indices, ensures balanced negative sampling, 
+    and saves the processed data in both text and NumPy binary formats.
+
+    Outputs:
+        - ratings_final.txt: Processed user-item interactions with binary labels.
+        - raw_ratings_final.txt: Original ratings for positive interactions.
+        - ratings_final.npy: NumPy array of processed interactions.
+
+    Prints:
+        - Number of users and items in the final dataset.
+    """
     file = "data/" + DATASET + "/" + RATING_FILE_NAME[DATASET]
 
     print("reading rating file ...")
@@ -101,6 +132,25 @@ def convert_rating():
 
 
 def convert_kg():
+    """
+    Converts a knowledge graph (KG) file into a processed format with unique 
+    integer indices for entities and relations, and saves the result in both 
+    text and NumPy binary formats.
+    The function reads the raw KG file, assigns unique indices to entities 
+    and relations, and writes the processed triples (head, relation, tail) 
+    to an output text file. It also saves the processed data as a NumPy array.
+    
+    Globals:
+        entity_id2index (dict): A mapping from entity IDs to unique indices.
+        relation_id2index (dict): A mapping from relation IDs to unique indices.
+        DATASET (str): The name of the dataset being processed.
+    Outputs:
+        - A text file containing processed KG triples.
+        - A NumPy binary file containing the same data.
+    Prints:
+        - The number of unique entities (including items).
+        - The number of unique relations.
+    """
     print("converting kg file ...")
     entity_cnt = len(entity_id2index)
     relation_cnt = 0
@@ -132,7 +182,8 @@ def convert_kg():
 
         writer.write("%d\t%d\t%d\n" % (head, relation, tail))
     writer.close()
-
+    
+    # Save the knowledge graph as text and numpy files
     kg_np = np.loadtxt(save_path + ".txt", dtype=np.int64)
     np.save(save_path + ".npy", kg_np)
     print("number of entities (containing items): %d" % entity_cnt)
