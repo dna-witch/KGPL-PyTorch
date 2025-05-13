@@ -65,10 +65,10 @@ Performance improves steadily as interaction history increases, showing that the
 
 | Metric         | PyTorch Implementation | TensorFlow Implementation |
 |----------------|------------------------|----------------------------|
-| Recall@5       | ~7.1%                  | ~9.93%                     |
-| Recall@10      | ~12.4%                 | ~15.47%                    |
-| Recall@20      | ~17.6%                 | ~22.25%                    |
-| Precision@20   | ~2.0%                  | ~2.3%                      |
+| Recall@5       | 7.1%                  | 9.93%                     |
+| Recall@10      | 12.4%                 | 15.47%                    |
+| Recall@20      | 17.6%                 | 22.25%                    |
+| Precision@20   | 2.0%                  | 2.3%                      |
 
 The PyTorch model's metrics are closely aligned with the TensorFlow version, showing consistent performance trends. The small differences are likely due to minor implementation or environment setup differences, and overall, the reimplementation was successful.
 
