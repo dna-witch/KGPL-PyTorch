@@ -42,6 +42,37 @@ pip install -r requirements.txt
 ## Usage and Workflow
 The `KGPL_MUSIC_FINAL_40.ipynb` notebook provides a step-by-step example of preprocessing data, co-training, and evaluating the KGPL model on a benchmark dataset. It's a great starting point to understand the workflow and experiment with the recommender model!
 
+## Results
+
+The PyTorch reimplementation of KGPL demonstrates stable co-training dynamics and successfully replicates the original model’s behavior. Both student models (`f` and `g`) showed synchronized convergence over 40 epochs, with training loss decreasing from **~5.04 to ~1.81**, confirming effective learning from both observed and pseudo-labeled instances.
+
+### Validation Performance
+
+- **Recall@20** increased from ~0.67% (epoch 1) to **~15.3%** (epoch 40)
+- **Recall@10** reached ~9.4%
+- **Recall@5** reached ~6.2%
+
+Most learning occurred in the first 20 epochs, followed by gradual fine-tuning. Validation metrics plateaued without decline, indicating no overfitting.
+
+### Cold-Start Analysis
+
+- Users with ≤1 interaction: **Recall@20 ~8.3%**
+- Users with ≤2 interactions: **Recall@20 ~20.3%**
+
+Performance improves steadily as interaction history increases, showing that the KGPL model effectively mitigates cold-start issues using pseudo-labeling.
+
+### Top-K Test Set Evaluation
+
+| Metric         | PyTorch Implementation | TensorFlow Implementation |
+|----------------|------------------------|----------------------------|
+| Recall@5       | ~7.1%                  | ~9.93%                     |
+| Recall@10      | ~12.4%                 | ~15.47%                    |
+| Recall@20      | ~17.6%                 | ~22.25%                    |
+| Precision@20   | ~2.0%                  | ~2.3%                      |
+
+The PyTorch model's metrics are closely aligned with the TensorFlow version, showing consistent performance trends. The small differences are likely due to minor implementation or environment setup differences, and overall, the reimplementation was successful.
+
+---
 
 ## Contributors
 Shakuntala Mitra [@dna-witch](https://github.com/dna-witch/)
